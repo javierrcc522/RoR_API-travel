@@ -7,8 +7,6 @@ class Seed
     seed.generate_reviews
   end
 
-
-
   def generate_users
   5.times do |i|
     user = User.create!(

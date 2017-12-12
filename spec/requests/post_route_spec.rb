@@ -1,25 +1,25 @@
 require 'rails_helper'
 
-describe "post a review route", :type => :request do
+describe "post a destination route", :type => :request do
 
   before do
-    post '/reviews', params: { :title => 'test_title', :content => 'test_content', :city => 'test_city', :rating => 3 }
+    post '/destinations', params: { :country => 'USA', :city => 'Portland', :description => 'a really nice place' }
   end
 
-  it 'returns the title name' do
-    expect(JSON.parse(response.body)['title']).to eq('test_title')
+  it 'returns the country name' do
+    expect(JSON.parse(response.body)['country']).to eq('USA')
   end
 
-  it 'returns the review content' do
-    expect(JSON.parse(response.body)['content']).to eq('test_content')
+  it 'returns the city name' do
+    expect(JSON.parse(response.body)['city']).to eq('Portland')
   end
 
-  it 'returns the destination' do
-    expect(JSON.parse(response.body)['destination']).to eq('test_destination')
+  it 'returns the description content' do
+    expect(JSON.parse(response.body)['description']).to eq('a really nice place')
   end
 
-  it 'returns the rating' do
-    expect(JSON.parse(response.body)['rating']).to eq(3)
+  it 'returns the message' do
+    expect(JSON.parse(response.body)['message']).to eq('Your destination has been created successfully!')
   end
 
   it 'returns a created status' do
