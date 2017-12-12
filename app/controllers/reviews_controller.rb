@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
     @destination = Destination.find(params[:id])
     @destination.destroy
   end
-
+  
   private
   def json_response(object, status = :ok)
     render json: object, status: status
