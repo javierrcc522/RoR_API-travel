@@ -1,31 +1,29 @@
 class ReviewsController < ApplicationController
-
   def index
-    @reviews = Review.all
+    @destinations = Destination.find(params[:destination_id])
+    @reviews = @destinations.reviews
     json_response(@reviews)
   end
 
   def show
-    @review = Review.find(params[:id])
+    @destination = Destination.find(params[:destination_id])
+    @review = @destination.reviews.find(params[:id])
     json_response(@review)
   end
 
   def create
-    @review = Review.create!(review_params)
-    json_response(@review, :created)
+    @destination = Destination.create(destination_params)
+    json_response(@destination)
   end
 
   def update
-    if @review.update!(review_params)
-      render status: 200, json: {
-       message: "Your review has been updated successfully."
-       }
-    end
+    @destination = Destination.find(params[:id])
+    @destination.update(destination_params)
   end
 
   def destroy
-    @review = Review.find(params[:id])
-    @review.destroy
+    @destination = Destination.find(params[:id])
+    @destination.destroy
   end
 
   private
@@ -34,6 +32,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.permit(:author, :content, :rating, :city)
+    params.permit(:rating, :content, :user_id, :destination_id)
   end
 end
