@@ -8,7 +8,6 @@ end
 
 describe Review, 'association' do
   it { should belong_to :destination }
-  it { should belong_to :user }
 end
 
 describe Review, 'column_specification' do

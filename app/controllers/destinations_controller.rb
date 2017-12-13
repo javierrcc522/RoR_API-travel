@@ -1,7 +1,9 @@
 class DestinationsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index ]
+
   def index
     if params[:country]
-      country = params[:country]
+      @country = params[:country]
       @destinations = Destination.where(country: params[:country])
       json_response(@destinations)
     else

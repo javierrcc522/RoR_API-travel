@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index ]
+
   def index
     @destinations = Destination.find(params[:destination_id])
     @reviews = @destinations.reviews
@@ -25,13 +27,13 @@ class ReviewsController < ApplicationController
     @destination = Destination.find(params[:id])
     @destination.destroy
   end
-  
+
   private
   def json_response(object, status = :ok)
     render json: object, status: status
   end
 
   def review_params
-    params.permit(:rating, :title, :content, :user_id, :destination_id)
+    params.permit(:rating, :title, :content, :destination_id)
   end
 end
